@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4 text-center" style="color:#A50044;">Players</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for player in players %}
+    <div class="col">
+        <div class="card h-100 border-0 shadow" style="border-top: 4px solid #FDB913;">
+            <img src="{{ player.person.picture.url }}"
+                 class="card-img-top"
+                 alt="{{ player.person.name }} {{ player.person.surname }}"
+                 style="object-fit:cover;height:260px;background:#eee;">
+            <div class="card-body">
+                <h5 class="card-title">{{ player.person.name }} {{ player.person.surname }}</h5>
+                <p class="card-text mb-1"><strong>Position:</strong> {{ player.get_position_display }}</p>
+                <p class="card-text mb-1"><strong>Jersey #:</strong> {{ player.dress_number }}</p>
+                <p class="card-text mb-1"><strong>Nationality:</strong> {{ player.nationality }}</p>
+                <p class="card-text mb-1"><strong>Goals:</strong> {{ player.goals }} | <strong>Assists:</strong> {{ player.assists }}</p>
+                <a href="#" class="btn btn-sm" style="background:#004D98;color:#FDB913;">Profile</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No players found.</p>
+    {% endfor %}
+</div>
+{% endblock %}
