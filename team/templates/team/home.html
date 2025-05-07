@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block site_heading %}WELCOME TO FC BARCELONA MANAGER{% endblock %}
+{% block shortcuts %}{% endblock %}
+{% load static %}
+
+
+{% block content %}
+<div class="row justify-content-center align-items-center mb-5" style="min-height: 60vh;">
+  <div class="col-lg-5 d-flex flex-column align-items-center justify-content-center">
+    <div class="p-5 rounded-4 shadow-lg text-center" style="background:linear-gradient(135deg,#004D98cc,#A50044cc); color:#fff; min-width:310px;">
+      <img src="{% static 'club_logo.webp' %}" alt="FCB Logo" style="height: 90px; margin-bottom: 16px;">
+      <h2 class="mb-4 fw-bold" style="font-size:2.2rem; letter-spacing:2px;">Players</h2>
+      <span class="badge rounded-pill" style="background:#FDB913; color:#A50044; font-size:1.1rem; font-weight:700; margin-bottom:7px;">{{ total_players }} Players</span>
+      <p>View complete FC Barcelona first team squad.</p>
+      <a href="{% url 'player_list' %}" class="btn btn-lg" style="background:#FDB913;color:#A50044;font-weight:800;letter-spacing:2.2px;">Browse Players</a>
+    </div>
+  </div>
+  <div class="col-lg-1 text-center d-none d-lg-block">
+    <span style="font-size:2.2rem; color:#FDB913; font-family:Oswald;">OR</span>
+  </div>
+  <div class="col-lg-5 d-flex flex-column align-items-center justify-content-center">
+    <div class="p-5 rounded-4 shadow-lg text-center" style="background:linear-gradient(135deg,#A50044cc,#004D98cc); color:#fff; min-width:310px;">
+      <img src="{% static 'coach_icon.png' %}" alt="Coach icon" style="height: 90px; margin-bottom: 16px;">
+      <h2 class="mb-4 fw-bold" style="font-size:2.2rem; letter-spacing:2px;">Coaching Staff</h2>
+      <span class="badge rounded-pill" style="background:#FDB913; color:#004D98; font-size:1.1rem; font-weight:700; margin-bottom:7px;">{{ total_trainers }} Staff</span>
+      <p>Meet the coaching and support staff behind the team.</p>
+      <a href="{% url 'trainer_list' %}" class="btn btn-lg" style="background:#FDB913;color:#004D98;font-weight:800;letter-spacing:2.2px;">Browse Staff</a>
+    </div>
+  </div>
+</div>
+
+<!-- Injuries and last update -->
+<div class="row justify-content-center mt-5">
+  <div class="col-lg-9">
+    <div class="bg-light rounded-4 shadow p-4">
+      <h3 class="mb-3" style="color:#A50044; font-family:'Oswald',sans-serif;">Latest Player Injuries</h3>
+      {% if injuries %}
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead style="background: #FDB91333;">
+              <tr>
+                <th>Name</th>
+                <th>Injury Type</th>
+                <th>Date of Injury</th>
+                <th>Expected Return</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for injury in injuries %}
+              <tr>
+                <td style="font-weight:600; color:#004D98;">{{ injury.player.person.name }} {{ injury.player.person.surname }}</td>
+                <td>{{ injury.type_of_injury }}</td>
+                <td>
+                  {{ injury.date_of_injury|date:"M d, Y" }}
+                </td>
+                <td>
+                  {% if injury.expected_return_date %}
+                    {{ injury.expected_return_date|date:"M d, Y" }}
+                  {% else %}
+                    Unknown
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="text-secondary">No injuries reported currently.</p>
+      {% endif %}
+      <div class="text-end mt-2">
+        <small class="text-muted">
+          Last update:
+          {% if last_update %}
+            {{ last_update|date:"M d, Y" }}
+          {% else %}
+            Never
+          {% endif %}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

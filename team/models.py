@@ -18,6 +18,12 @@ class Person(models.Model):
         help_text='Enter the person\'s surname',
         error_messages={'blank': 'Surname is required.'}
     )
+    bio = models.TextField(
+        verbose_name='Biography',
+        help_text="Enter a brief bio or profile of this person",
+        blank=True
+    )
+
     date_of_birth = models.DateField(
         verbose_name='Date of Birth',
         help_text='Enter the date of birth (YYYY-MM-DD)',

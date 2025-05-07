@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
+{% block site_heading %}FC BARCELONA - COACHING STAFF{% endblock %}
+{% block shortcuts %}
+<nav class="barca-scrollnav">
+   <a class="btn" href="#coaching">Coaching Staff</a>
+</nav>
+{% endblock %}
 {% block content %}
-<h2 class="mb-4 text-center" style="color:#004D98;">Trainers</h2>
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<h2 class="mb-4 text-center" style="color:#FDB913;">Trainers</h2>
+<div class="row justify-content-center row-cols-1 row-cols-md-4 g-4 mb-4">
     {% for trainer in trainers %}
-    <div class="col">
-        <div class="card h-100 border-0 shadow" style="border-top: 4px solid #A50044;">
-            <img src="{{ trainer.person.picture.url }}"
-                 class="card-img-top"
-                 alt="{{ trainer.person.name }} {{ trainer.person.surname }}"
-                 style="object-fit:cover;height:260px;">
-            <div class="card-body">
-                <h5 class="card-title">{{ trainer.person.name }} {{ trainer.person.surname }}</h5>
-                <p class="card-text"><strong>Role:</strong> {{ trainer.get_team_role_display }}</p>
-                <a href="#" class="btn btn-sm" style="background:#A50044;color:#FDB913;">Profile</a>
+    <div class="col d-flex justify-content-center">
+        <a href="#" class="text-decoration-none" style="width:100%;">
+        <div class="card card-barca border-0 shadow position-relative" style="width: 100%; max-width: 350px;">
+            <img src="{{ trainer.person.picture.url }}" class="card-img-top" style="object-fit:cover;height:350px;filter:brightness(0.81);">
+            <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                <h5 class="card-title text-white fw-bold mb-3" style="text-shadow:1px 3px 8px #222;">
+                    {{ trainer.person.name }} {{ trainer.person.surname }}
+                </h5>
             </div>
         </div>
+        </a>
     </div>
     {% empty %}
     <p>No trainers found.</p>
