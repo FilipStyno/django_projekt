@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block site_heading %}
+  {{ person.name }} {{ person.surname }}{% if player %} - Player{% elif trainer %} - Coach{% endif %}
+{% endblock %}
+{% block shortcuts %}{% endblock %}
+{% block content %}
+<div class="row g-5 justify-content-center align-items-start">
+  <div class="col-md-4 text-center">
+    <div class="card shadow-lg border-0 p-3" style="background:#F8F9FC;border-radius:2rem;">
+      <img src="{{ person.picture.url }}" class="img-fluid rounded shadow-sm" style="max-height:370px;object-fit:cover;">
+      <h3 class="mt-4 fw-bold" style="color:#A50044;">{{ person.name }} {{ person.surname }}</h3>
+      {% if player %}
+        <span class="badge rounded-pill px-4 py-2" style="background:#FDB913;color:#A50044;font-size:1.1em;">Player</span>
+      {% elif trainer %}
+        <span class="badge rounded-pill px-4 py-2" style="background:#FDB913;color:#004D98;font-size:1.1em;">Coach</span>
+      {% endif %}
+      <div class="mt-4">
+        <p><b>Date of Birth:</b> {{ person.date_of_birth }}</p>
+        <p><b>Contact:</b> {{ person.contact }}</p>
+        {% if trainer %}
+          <p><b>Coach Role:</b> {{ trainer.get_team_role_display }}</p>
+        {% endif %}
+        {% if player %}
+          <p><b>Position:</b> {{ player.get_position_display }}</p>
+          <p><b>Jersey #:</b> {{ player.dress_number }}</p>
+          <p><b>Nationality:</b> {{ player.nationality }}</p>
+          <p><b>Goals:</b> {{ player.goals }} | <b>Assists:</b> {{ player.assists }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="mb-4">
+      <h4 class="fw-bold" style="color:#004D98;">Biography</h4>
+      <div style="white-space: pre-line;">{{ person.bio }}</div>
+    </div>
+    {% if player and injuries %}
+      <div>
+        <h5 class="fw-bold" style="color:#A50044;">Injury History</h5>
+        <ul class="list-group list-group-flush">
+          {% for injury in injuries %}
+          <li class="list-group-item">
+            <b>{{ injury.type_of_injury }}</b>
+            <span class="text-muted">[{{ injury.date_of_injury|date:"M d, Y" }}]</span>
+            {% if injury.expected_return_date %}
+            &mdash; Expected return: <b>{{ injury.expected_return_date|date:"M d, Y" }}</b>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

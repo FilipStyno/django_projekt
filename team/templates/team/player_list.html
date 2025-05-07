@@ -6,7 +6,7 @@
 <div class="row justify-content-center row-cols-1 row-cols-md-4 g-4 mb-4">
     {% for player in keepers %}
     <div class="col d-flex justify-content-center">
-        <a href="#" class="text-decoration-none" style="width:100%;">
+        <a href="{% url 'person_detail' pk=player.person.pk %}" class="text-decoration-none" style="width:100%;">
         <div class="card card-barca border-0 shadow position-relative" style="width: 100%; max-width: 350px;">
             <img src="{{ player.person.picture.url }}" class="card-img-top" style="object-fit:cover;height:350px;filter:brightness(0.78);">
             <div class="card-img-overlay d-flex align-items-end justify-content-center">
@@ -25,7 +25,7 @@
 <div class="row justify-content-center row-cols-1 row-cols-md-4 g-4 mb-4">
     {% for player in defenders %}
     <div class="col d-flex justify-content-center">
-        <a href="#" class="text-decoration-none" style="width:100%;">
+        <a href="{% url 'person_detail' pk=player.person.pk %}" class="text-decoration-none" style="width:100%;">
         <div class="card card-barca border-0 shadow position-relative" style="width: 100%; max-width: 350px;">
             <img src="{{ player.person.picture.url }}" class="card-img-top" style="object-fit:cover;height:350px;filter:brightness(0.78);">
             <div class="card-img-overlay d-flex align-items-end justify-content-center">
@@ -63,7 +63,7 @@
 <div class="row justify-content-center row-cols-1 row-cols-md-4 g-4 mb-4">
     {% for player in forwards %}
     <div class="col d-flex justify-content-center">
-        <a href="#" class="text-decoration-none" style="width:100%;">
+        <a href="{% url 'person_detail' pk=player.person.pk %}" class="text-decoration-none" style="width:100%;">
         <div class="card card-barca border-0 shadow position-relative" style="width: 100%; max-width: 350px;">
             <img src="{{ player.person.picture.url }}" class="card-img-top" style="object-fit:cover;height:350px;filter:brightness(0.78);">
             <div class="card-img-overlay d-flex align-items-end justify-content-center">

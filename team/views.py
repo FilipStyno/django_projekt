@@ -1,10 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Player, Trainer
 
-from .models import Player
-from django.shortcuts import render
-from django.utils import timezone
-from .models import Player, Trainer, Injury
+from django.shortcuts import render, get_object_or_404
+from .models import Person, Player, Trainer, Injury
 
 def home(request):
     total_players = Player.objects.count()
@@ -33,3 +29,24 @@ def player_list(request):
 def trainer_list(request):
     trainers = Trainer.objects.select_related('person').all()
     return render(request, 'team/trainer_list.html', {'trainers': trainers})
+
+def person_detail(request, pk):
+    person = get_object_or_404(Person, pk=pk)
+    # Try to get linked Player or Trainer
+    try:
+        player = person.player
+    except Player.DoesNotExist:
+        player = None
+    try:
+        trainer = person.trainer
+    except Trainer.DoesNotExist:
+        trainer = None
+    # Injuries (if a player)
+    injuries = player.injuries.all() if player else []
+    context = {
+        "person": person,
+        "player": player,
+        "trainer": trainer,
+        "injuries": injuries,
+    }
+    return render(request, 'team/person_detail.html', context)

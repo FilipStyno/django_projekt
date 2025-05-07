@@ -6,19 +6,19 @@
 
 {% block content %}
 <div class="row justify-content-center align-items-center mb-5" style="min-height: 60vh;">
-  <div class="col-lg-5 d-flex flex-column align-items-center justify-content-center">
+  <div class="col-lg-5 mb-3 d-flex flex-column align-items-center justify-content-center">
     <div class="p-5 rounded-4 shadow-lg text-center" style="background:linear-gradient(135deg,#004D98cc,#A50044cc); color:#fff; min-width:310px;">
       <img src="{% static 'club_logo.webp' %}" alt="FCB Logo" style="height: 90px; margin-bottom: 16px;">
       <h2 class="mb-4 fw-bold" style="font-size:2.2rem; letter-spacing:2px;">Players</h2>
       <span class="badge rounded-pill" style="background:#FDB913; color:#A50044; font-size:1.1rem; font-weight:700; margin-bottom:7px;">{{ total_players }} Players</span>
-      <p>View complete FC Barcelona first team squad.</p>
+      <p>View the complete FC Barcelona first team squad here.</p>
       <a href="{% url 'player_list' %}" class="btn btn-lg" style="background:#FDB913;color:#A50044;font-weight:800;letter-spacing:2.2px;">Browse Players</a>
     </div>
   </div>
   <div class="col-lg-1 text-center d-none d-lg-block">
     <span style="font-size:2.2rem; color:#FDB913; font-family:Oswald;">OR</span>
   </div>
-  <div class="col-lg-5 d-flex flex-column align-items-center justify-content-center">
+  <div class="col-lg-5 mb-3 d-flex flex-column align-items-center justify-content-center">
     <div class="p-5 rounded-4 shadow-lg text-center" style="background:linear-gradient(135deg,#A50044cc,#004D98cc); color:#fff; min-width:310px;">
       <img src="{% static 'coach_icon.png' %}" alt="Coach icon" style="height: 90px; margin-bottom: 16px;">
       <h2 class="mb-4 fw-bold" style="font-size:2.2rem; letter-spacing:2px;">Coaching Staff</h2>
